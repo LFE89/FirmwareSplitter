@@ -27,7 +27,7 @@ Usage of fwsplitter:
         Start address (hex value, e.g. 0x00000000) (default "0x00000000")
 ```
 
-### Extract Partition From Dump
+### Extract Partition From Dump - Example
 ```
 fwsplitter 
   -chunksize 4096 
