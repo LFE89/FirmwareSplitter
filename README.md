@@ -33,7 +33,7 @@ fwsplitter
   -chunksize 4096 
   -length "0x56000000" 
   -startAddress "0x08000000" 
-  -inputFilePath "Z:\\Firmware\\dump.img" `
+  -inputFilePath "Z:\\Firmware\\dump.img" 
   -outputFileName "boot.img" 
   -outputDirectoryPath "Z:\\Firmware"
 ```
