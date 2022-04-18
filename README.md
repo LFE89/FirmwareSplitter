@@ -1,4 +1,11 @@
 # Firmware Dump Splitter
+## License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the GNU General Public License for more details.
+For full license text, see http://www.gnu.org/licenses.
+
 ## General
 FirmwareSplitter is a fast and reliable software to extract different sections / partitions from firmware images.
 ![image](https://user-images.githubusercontent.com/60022287/163734878-9a0011c3-a1fa-4262-9b84-e810ff164e63.png)
