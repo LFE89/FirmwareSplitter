@@ -44,7 +44,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if *chunkSize == 0 {
+	if *chunkSize <= 0 {
 		fmt.Println("Invalid chunkSize.")
 		os.Exit(1)
 	}
@@ -86,8 +86,16 @@ func main() {
 	*startAddress = strings.ReplaceAll(*startAddress, "0x", "")
 	*length = strings.ReplaceAll(*length, "0x", "")
 
-	startAddressHex, _ := strconv.ParseInt(*startAddress, 16, 64)
-	lengthHex, _ := strconv.ParseInt(*length, 16, 64)
+	startAddressHex, err := strconv.ParseInt(*startAddress, 16, 64)
+	if err != nil {
+		fmt.Println("startAddress invalid.")
+		os.Exit(1)
+	}
+	lengthHex, err := strconv.ParseInt(*length, 16, 64)
+        if err != nil {
+		fmt.Println("length invalid.")
+		os.Exit(1)
+	}
 
 	if inputFileInfo.Size() < (startAddressHex + lengthHex) {
 		fmt.Println("File size cannot be smaller than startAddress + length.")
