@@ -9,7 +9,7 @@ For full license text, see http://www.gnu.org/licenses.
 ## Release
 | File        | Hash (SHA256) | Platform  |
 |:-----:|:-----:|:-----:|
-| release/fwsplitter-windows-x64.7z/fwsplitter.exe      | FD8A5F732E32951324D0120E8D21E50A6DCE57222F239A92B6886A36C5649C45 | Windows x64 |
+| release/fwsplitter.exe      | FD8A5F732E32951324D0120E8D21E50A6DCE57222F239A92B6886A36C5649C45 | Windows x64 |
 
 ## General
 FirmwareSplitter is a fast and reliable software to extract different sections / partitions from firmware images.
