@@ -17,6 +17,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 
 	firmware "feicho.com/reverseengineering/suite/firmware"
@@ -32,8 +33,6 @@ func main() {
 	outputFileName := flag.String("outputFileName", "", "Name of output file")
 
 	flag.Parse()
-
-	*outputFileName = strings.ReplaceAll(*outputFileName, "\\", "")
 
 	if *startAddress == "" || !strings.HasPrefix(*startAddress, "0x") {
 		fmt.Println("Invalid startAddress.")
@@ -77,6 +76,7 @@ func main() {
 		os.Exit(1)
 	}
 
+	*outputFileName = strings.ReplaceAll(*outputFileName, "\\", "")
 	_, folderError := os.Stat(*outputDirectoryPath)
 	if folderError != nil {
 		fmt.Println("Output folder does not exist.")
@@ -86,5 +86,13 @@ func main() {
 	*startAddress = strings.ReplaceAll(*startAddress, "0x", "")
 	*length = strings.ReplaceAll(*length, "0x", "")
 
-	firmware.SplitFile(*startAddress, *length, *chunkSize, *inputFilePath, strings.Join([]string{*outputDirectoryPath, *outputFileName}, "\\\\"))
+	startAddressHex, _ := strconv.ParseInt(*startAddress, 16, 64)
+	lengthHex, _ := strconv.ParseInt(*length, 16, 64)
+
+	if inputFileInfo.Size() < (startAddressHex + lengthHex) {
+		fmt.Println("File size cannot be smaller than startAddress + length.")
+		os.Exit(1)
+	}
+
+	firmware.SplitFile(startAddressHex, lengthHex, *chunkSize, *inputFilePath, strings.Join([]string{*outputDirectoryPath, *outputFileName}, "\\\\"))
 }
