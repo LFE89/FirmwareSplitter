@@ -16,12 +16,13 @@ For full license text, see http://www.gnu.org/licenses.
 | fwsplitter-v1.0.2-macos-x64      | 649FE6C0BA0652B70215743F850EF841E1AF3D11CB852A23C5F377F8387577BA | MacOS x64 |
 
 ## General
-FirmwareSplitter is a fast and reliable software to extract different sections / partitions from firmware images.
+FirmwareSplitter is a fast and reliable software, to extract different sections / partitions from firmware images / firmware dumps.
+
 ![image](https://user-images.githubusercontent.com/60022287/163734878-9a0011c3-a1fa-4262-9b84-e810ff164e63.png)
 
-It also supports custom chunkSizes, to handle large files such as 16GB full firmware dumps.
-The software has been developed, to extract different paritions from Android devices directly on the device itself (.. or anywhere else). 
-Has been used to mainly analyze a MediaTek Android OS device with a MT8167 chipset (with scatter files) - anyhow, the software can be used for any kind of files.
+It also supports custom chunk sizes, to handle large files such as 16 GB full firmware dumps (theoretically up to 8192 Petabyte).
+The software has been developed, to extract different paritions and sections from dumps of Android devices.
+Mainly to analyze devices such as a MediaTek Android OS device with a MT8167 chipset (with help of scatter files) - however, the software can be used for any kind of files.
 
 ## Usage
 ### Help
