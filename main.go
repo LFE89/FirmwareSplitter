@@ -26,7 +26,7 @@ import (
 func main() {
 	startAddress := flag.String("startAddress", "0x00000000", "Start address (hex value, e.g. 0x00000000)")
 	length := flag.String("length", "", "Length of section (hex value, e.g. 0x00010000)")
-	chunkSize := flag.Int64("chunkSize", 4096, "Chunk size to be used")
+	chunkSize := flag.Uint64("chunkSize", 4096, "Chunk size to be used")
 
 	inputFilePath := flag.String("inputFilePath", "", "Full path to input file")
 	outputDirectoryPath := flag.String("outputDirectoryPath", "", "Full path to output directory")
@@ -66,7 +66,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if *chunkSize > inputFileInfo.Size() {
+	if *chunkSize > uint64(inputFileInfo.Size()) {
 		fmt.Println("chunkSize cannot be larger than file size.")
 		os.Exit(1)
 	}
@@ -86,21 +86,21 @@ func main() {
 	*startAddress = strings.ReplaceAll(*startAddress, "0x", "")
 	*length = strings.ReplaceAll(*length, "0x", "")
 
-	startAddressHex, err := strconv.ParseInt(*startAddress, 16, 64)
+	startAddressHex, err := strconv.ParseUint(*startAddress, 16, 64)
 	if err != nil {
 		fmt.Println("startAddress invalid.")
 		os.Exit(1)
 	}
-	lengthHex, err := strconv.ParseInt(*length, 16, 64)
-        if err != nil {
+	lengthHex, err := strconv.ParseUint(*length, 16, 64)
+	if err != nil {
 		fmt.Println("length invalid.")
 		os.Exit(1)
 	}
 
-	if inputFileInfo.Size() < (startAddressHex + lengthHex) {
+	if inputFileInfo.Size() < int64(startAddressHex+lengthHex) {
 		fmt.Println("File size cannot be smaller than startAddress + length.")
 		os.Exit(1)
 	}
 
-	firmware.SplitFile(startAddressHex, lengthHex, *chunkSize, *inputFilePath, strings.Join([]string{*outputDirectoryPath, *outputFileName}, "\\\\"))
+	firmware.ExtractSection(startAddressHex, lengthHex, *chunkSize, *inputFilePath, strings.Join([]string{*outputDirectoryPath, *outputFileName}, "\\\\"))
 }

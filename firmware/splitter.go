@@ -19,7 +19,7 @@ import (
 	"os"
 )
 
-func SplitFile(startAddress int64, length int64, chunkSize int64, inputFile string, outputFile string) error {
+func ExtractSection(startAddress uint64, length uint64, chunkSize uint64, inputFile string, outputFile string) error {
 
 	fmt.Println("[1/4] Process started...Please wait.")
 
@@ -33,10 +33,10 @@ func SplitFile(startAddress int64, length int64, chunkSize int64, inputFile stri
 	}
 	fmt.Println("[2/4] Creating splitted file: " + outputFile)
 
-	var bufferSize int64 = chunkSize
+	var bufferSize uint64 = chunkSize
 	var isNextRunCompleted bool = false
-	var totalBytesWritten int64 = 0
-	var offset int64 = 0
+	var totalBytesWritten uint64 = 0
+	var offset uint64 = 0
 
 	fmt.Println("[3/4] Writing to file...")
 
@@ -47,7 +47,7 @@ func SplitFile(startAddress int64, length int64, chunkSize int64, inputFile stri
 
 	for {
 		buffer := make([]byte, bufferSize)
-		readBytes, err := inputStream.ReadAt(buffer, (startAddress + offset))
+		readBytes, err := inputStream.ReadAt(buffer, int64((startAddress + offset)))
 		if err != nil {
 			return err
 		}
@@ -64,7 +64,7 @@ func SplitFile(startAddress int64, length int64, chunkSize int64, inputFile stri
 			break
 		}
 
-		var writtenBytesInRun int64 = int64(readBytes)
+		var writtenBytesInRun uint64 = uint64(readBytes)
 		totalBytesWritten += writtenBytesInRun
 
 		if (totalBytesWritten + writtenBytesInRun) >= length {
